@@ -92,6 +92,8 @@ public class LavaSlapListener implements Listener
 				{
 					LavaSlap.progressAll();
 				}
+				
+				LavaSlap.playAllEffects();
 			}
 		};
 		

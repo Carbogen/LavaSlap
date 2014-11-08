@@ -210,11 +210,20 @@ public class LavaSlap
 	
 	public void playEffects()
 	{
+		if(!player.isOnline() || player.isDead())
+		{
+			remove();
+			return;
+		}
+			
 		for(Block b : this.affectedBlocks)
 		{
 			if(b != null && Math.random() < PARTICLE_DENSITY)
 			{
-				ParticleEffect.LAVA.display(b.getLocation(), 0, 0, 0, 0, 1);
+				if(b.getRelative(BlockFace.UP).getType().isTransparent())
+				{
+					ParticleEffect.LAVA.display(b.getLocation(), 0, 0, 0, 0, 1);
+				}
 			}
 		}
 	}
@@ -239,11 +248,6 @@ public class LavaSlap
 		{
 			remove();
 			return;
-		}
-		
-		else if(curTime < time + delay)
-		{
-			playEffects();
 		}
 		
 		if(!isFinished && curTime > time + delay && curTime < time + delay + executeTime)
@@ -302,6 +306,18 @@ public class LavaSlap
 					}
 				}
 			}*/
+		}
+	}
+	
+	public static void playAllEffects()
+	{
+		long curTime = System.currentTimeMillis();
+		for(Player p : instances.keySet())
+		{
+			if(curTime < instances.get(p).time + delay)
+			{
+				instances.get(p).playEffects();
+			}
 		}
 	}
 	

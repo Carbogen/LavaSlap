@@ -37,7 +37,7 @@ public class LavaSlapInformation extends AbilityModule
 	
 	public String getVersion()
 	{
-		return "v1.0.3.1";
+		return "v1.0.3.2";
 	}
 	
 	public String getElement()
